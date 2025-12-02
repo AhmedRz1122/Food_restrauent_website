@@ -16,23 +16,24 @@ const Loginpage = () => {
 
     try {
       const response = await axios.post(
-        "/api/login",
+        "http://localhost:5000/api/auth/login",
         { email, password },
         { headers: { "Content-Type": "application/json" } }
       );
 
       if (response.status===200) {
         
-        const { access_token } = response.data;
+        const { token } = response.data;
         
         // Store token in localStorage
-        localStorage.setItem("token", access_token);
+        localStorage.setItem("token", token);
         
         // Set default Authorization header for future requests
-        axios.defaults.headers.common["Authorization"] = `Bearer ${access_token}`;
+        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
         
-        // console.log("Login successful. Token:", access_token);
-        navigate("/Home", { replace: true });  // Redirect to home on success
+        // console.log("Login successful. Token:", token);
+        // Redirect to the existing home route after successful login
+        navigate("/", { replace: true });
       } else {
         setError("Invalid email or password");
       }

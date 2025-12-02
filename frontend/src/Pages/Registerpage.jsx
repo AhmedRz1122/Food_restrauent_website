@@ -4,7 +4,7 @@ import axios from 'axios';
 import "./Registerpage.css";
 
 const Registerpage = () => {
-  const [username, setUsername] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -16,14 +16,14 @@ const Registerpage = () => {
 
     try {
       const response = await axios.post(
-        "/api/signup",
-        { username, email, password },
+        "http://localhost:5000/api/auth/register",
+        { name, email, password },
         { headers: { "Content-Type": "application/json" } }
       );
 
       if (response.status===201) {
         console.log("Registration successful:", response.data);
-        navigate('/Login', { replace: true });  // Redirect to login
+        navigate('/login', { replace: true });  // Redirect to login
       } else {
         setError(response.data.message || "Registration failed");
       }
@@ -56,8 +56,8 @@ const Registerpage = () => {
               id="username"
               type="text"
               name='username'
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               className="w-full h-10 px-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-shadow shadow-sm"
               placeholder="Name"
               required
