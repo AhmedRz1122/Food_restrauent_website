@@ -1,0 +1,10 @@
+/* Add to your global CSS file (e.g., index.css or App.css) */
+.carousel-item {
+  flex: 0 0 100% !important;
+  width: 100% !important;
+}
+
+.carousel-inner {
+  display: flex !important;
+  transition: transform 0.5s ease-in-out !important;
+}
